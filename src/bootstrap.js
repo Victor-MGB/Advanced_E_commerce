@@ -9,8 +9,8 @@ import authRouter from "./modules/auth/auth.routes.js";
 // import productRouter from "./modules/product/product.routes.js";
 // import reviewRouter from "./modules/review/review.routes.js";
 // import subCategoryRouter from "./modules/subcategory/subcategory.routes.js";
-// import userRouter from "./modules/user/user.routes.js";
-// import wishListRouter from "./modules/wishlist/wishlist.routes.js";
+import userRouter from "./modules/user/user.routes.js";
+import wishListRouter from "./modules/wishlist/wishlist.routes.js";
 // import { AppError } from "./utils/AppError.js";
 
 export function bootstrap(app) {
@@ -18,10 +18,10 @@ export function bootstrap(app) {
 //   app.use("/api/v1/subcategories", subCategoryRouter);
 //   app.use("/api/v1/brands", brandRouter);
 //   app.use("/api/v1/products", productRouter);
-//   app.use("/api/v1/users", userRouter);
+  app.use("/api/v1/users", userRouter);
   app.use("/api/v1/auth", authRouter);
 //   app.use("/api/v1/review", reviewRouter);
-//   app.use("/api/v1/wishlist", wishListRouter);
+  app.use("/api/v1/wishlist", wishListRouter);
 //   app.use("/api/v1/address", addressRouter);
 //   app.use("/api/v1/coupons", couponRouter);
 //   app.use("/api/v1/carts", cartRouter);
