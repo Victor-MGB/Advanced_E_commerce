@@ -4,7 +4,7 @@ const reviewSchema = new Schema(
     {
         text: {
             type: String,   
-            trim: true
+            trim: true,
             required: true,
         },
         productId: {
@@ -29,4 +29,4 @@ reviewSchema.pre(['find','findOne'],function (){
   this.populate('userId','name -_id')
 })
 
-export const reviemodel = model("review", reviewSchema);
+export const reviewModel = model("review", reviewSchema);
