@@ -1,11 +1,11 @@
-// import { globalErrorHandling } from "./middlewares/GlobalErrorHandling.js";
+import { globalErrorHandling } from "./middlewares/GlobalErrorHandling.js";
 // import addressRouter from "./modules/address/address.routes.js";
 import authRouter from "./modules/auth/auth.routes.js";
 // import brandRouter from "./modules/brand/brand.routes.js";
 // import cartRouter from "./modules/cart/cart.routes.js";
 import categoryRouter from "./modules/category/category.routes.js";
 // import couponRouter from "./modules/coupon/coupon.routes.js";
-// import orderRouter from "./modules/order/order.routes.js";
+import orderRouter from "./modules/order/order.routes.js";
 import productRouter from "./modules/product/product.routes.js";
 import reviewRouter from "./modules/review/review.routes.js";
 import subCategoryRouter from "./modules/subcategory/subcategory.routes.js";
@@ -25,11 +25,11 @@ export function bootstrap(app) {
 //   app.use("/api/v1/address", addressRouter);
 //   app.use("/api/v1/coupons", couponRouter);
 //   app.use("/api/v1/carts", cartRouter);
-//   app.use("/api/v1/orders", orderRouter);
+  app.use("/api/v1/orders", orderRouter);
 
-//   app.all("*", (req, res, next) => {
-//     next(new AppError("Endpoint was not found", 404));
-//   });
+  app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
-//   app.use(globalErrorHandling);
+  app.use(globalErrorHandling);
 }
