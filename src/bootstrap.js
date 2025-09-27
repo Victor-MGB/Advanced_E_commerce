@@ -4,7 +4,7 @@ import authRouter from "./modules/auth/auth.routes.js";
 // import brandRouter from "./modules/brand/brand.routes.js";
 // import cartRouter from "./modules/cart/cart.routes.js";
 import categoryRouter from "./modules/category/category.routes.js";
-// import couponRouter from "./modules/coupon/coupon.routes.js";
+import couponRouter from "./modules/coupon/coupon.routes.js";
 import orderRouter from "./modules/order/order.routes.js";
 import productRouter from "./modules/product/product.routes.js";
 import reviewRouter from "./modules/review/review.routes.js";
@@ -23,7 +23,7 @@ export function bootstrap(app) {
   app.use("/api/v1/review", reviewRouter);
   app.use("/api/v1/wishlist", wishListRouter);
 //   app.use("/api/v1/address", addressRouter);
-//   app.use("/api/v1/coupons", couponRouter);
+  app.use("/api/v1/coupons", couponRouter);
 //   app.use("/api/v1/carts", cartRouter);
   app.use("/api/v1/orders", orderRouter);
 

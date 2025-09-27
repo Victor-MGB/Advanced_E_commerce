@@ -22,3 +22,4 @@ const couponSchema = new Schema(
     {timestamps: true}
 )
 
+export const couponModel = model("coupon", couponSchema);
