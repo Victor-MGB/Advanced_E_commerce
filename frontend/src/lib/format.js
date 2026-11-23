@@ -1,4 +1,4 @@
-const CURRENCY = import.meta.env.VITE_CURRENCY || "USD";
+const CURRENCY = import.meta.env.VITE_CURRENCY || "NGN";
 
 export const money = (value = 0) =>
   new Intl.NumberFormat("en-NG", {

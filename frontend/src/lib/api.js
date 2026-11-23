@@ -1,7 +1,9 @@
 import { demoDb } from "./demoDb.js";
 
-const API_URL = import.meta.env.VITE_API_URL || "";
-export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE !== "false" || !API_URL;
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://advanced-e-commerce-ireg.onrender.com/api/v1";
+export const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true" || !API_URL;
 
 let tokenProvider = () => null;
 export const setTokenProvider = (provider) => {
