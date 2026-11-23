@@ -1,6 +1,5 @@
 import { catchAsyncError } from "../../utils/catchAsyncError.js";
 import { AppError } from "../../utils/AppError.js";
-import { deleteOne } from "../../handlers/factors.js";
 import { ApiFeatures } from "../../utils/ApiFeatures.js";
 import { reviewModel } from "../../../Database/models/review.model.js";
 
@@ -94,4 +93,16 @@ export const updateReview = catchAsyncError(async (req, res, next) => {
  * @route   DELETE /api/v1/reviews/:id
  * @access  Private (user/admin)
  */
-export const deleteReview = deleteOne(reviewModel, "Review");
+export const deleteReview = catchAsyncError(async (req, res, next) => {
+  const filter =
+    req.user.role === "admin"
+      ? { _id: req.params.id }
+      : { _id: req.params.id, userId: req.user._id };
+
+  const review = await reviewModel.findOneAndDelete(filter);
+  if (!review) {
+    return next(new AppError("Review not found or you are not authorized to delete it", 404));
+  }
+
+  res.status(200).json({ message: "success", data: review });
+});

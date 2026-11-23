@@ -8,7 +8,7 @@ const addAddressValidation = Joi.object({
 });
 
 const deleteAddressValidation = Joi.object({
-  address:Joi.string().hex().length(24).required(),
+  addressId: Joi.string().hex().length(24).required(),
 });
 
 export { addAddressValidation, deleteAddressValidation };

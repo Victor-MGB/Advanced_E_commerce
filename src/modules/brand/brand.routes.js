@@ -14,7 +14,7 @@ brandRouter
   .route("/")
   .post(
     protectedRoutes,
-    allowedTo("admin", "user"),
+    allowedTo("admin"),
     validate(addBrandValidation),
     brand.addBrand
   )

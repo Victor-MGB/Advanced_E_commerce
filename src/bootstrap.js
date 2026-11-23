@@ -21,10 +21,13 @@ export function bootstrap(app) {
   app.use("/api/v1/users", userRouter);
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1/review", reviewRouter);
+  app.use("/api/v1/reviews", reviewRouter);
   app.use("/api/v1/wishlist", wishListRouter);
   app.use("/api/v1/address", addressRouter);
+  app.use("/api/v1/addresses", addressRouter);
   app.use("/api/v1/coupons", couponRouter);
-  //   app.use("/api/v1/carts", cartRouter);
+  app.use("/api/v1/cart", cartRouter);
+  app.use("/api/v1/carts", cartRouter);
   app.use("/api/v1/orders", orderRouter);
 
   app.use((req, res) => {

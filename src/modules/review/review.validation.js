@@ -1,9 +1,9 @@
 import Joi from "joi";
 
 const addReviewValidation = Joi.object({
-  text: Joi.string().trim().required(),
+  comment: Joi.string().trim().required(),
   productId: Joi.string().hex().length(24).required(),
-  rate: Joi.number().default(1),
+  rating: Joi.number().integer().min(1).max(5).default(1),
 });
 
 const getSpecificReviewValidation = Joi.object({
@@ -12,8 +12,8 @@ const getSpecificReviewValidation = Joi.object({
 
 const updateReviewValidation = Joi.object({
   id: Joi.string().hex().length(24).required(),
-  text: Joi.string().trim(),
-  rate: Joi.number(),
+  comment: Joi.string().trim(),
+  rating: Joi.number().integer().min(1).max(5),
 });
 
 const deleteReviewValidation = Joi.object({

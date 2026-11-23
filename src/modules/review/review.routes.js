@@ -15,7 +15,7 @@ reviewRouter
   .route("/")
   .post(
     protectedRoutes,
-    allowedTo("user"),
+    allowedTo("user", "admin"),
     validate(addReviewValidation),
     review.addReview
   )
@@ -25,7 +25,7 @@ reviewRouter
   .route("/:id")
   .put(
     protectedRoutes,
-    allowedTo("user"),
+    allowedTo("user", "admin"),
     validate(updateReviewValidation),
     review.updateReview
   )

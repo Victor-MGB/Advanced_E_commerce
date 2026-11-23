@@ -15,7 +15,7 @@ couponRouter
   .route("/")
   .post(
     protectedRoutes,
-    allowedTo("user", "admin"),
+    allowedTo("admin"),
     validate(createCouponValidation),
     coupon.createCoupon
   )
@@ -25,13 +25,13 @@ couponRouter
   .route("/:id")
   .put(
     protectedRoutes,
-    allowedTo("admin", "user"),
+    allowedTo("admin"),
     validate(updateCouponValidation),
     coupon.updateCoupon
   )
   .delete(
     protectedRoutes,
-    allowedTo("user", "admin"),
+    allowedTo("admin"),
     validate(deleteCouponValidation),
     coupon.deleteCoupon
   )

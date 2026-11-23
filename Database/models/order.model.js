@@ -1,44 +1,53 @@
-import {Schema, model} from "mongoose";
+import { Schema, model } from "mongoose";
 
 const orderSchema = new Schema(
-    {
-        userId: {
-            type: Schema.ObjectId,
-            required: true,
-            ref: "user",
-        },
-        cartItems: [
-            {
-                productId: {type:Schema.ObjectId, ref: "product"},
-                quantity: {
-                    type: Number,
-                    default: 1
-                },
-                price: Number,
-                totalProductDiscount: Number,
-            }
-        ],
-        shipping: {
-            street: String,
-            city: String,
-            phone: Number,
-        },
-        paymentMethod: {
-            type: String,
-            enum: ['cash', 'card'],
-            default: 'cash',
-        },
-        isPaid: {
-            type: Boolean,
-            default: false,
-        },
-        isDelivered: {
-            type: Boolean,
-            default: false,
-        },
-        paidAt: Date,
-        deliveredAt: Date,
-    }
-)
+  {
+    user: {
+      type: Schema.ObjectId,
+      ref: "user",
+      required: true,
+    },
+    cartItems: [
+      {
+        productId: { type: Schema.ObjectId, ref: "product", required: true },
+        quantity: { type: Number, default: 1, min: 1 },
+        price: Number,
+        totalProductDiscount: Number,
+      },
+    ],
+    shippingAddress: {
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      phone: { type: String, required: true },
+    },
+    totalOrderPrice: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    paymentMethod: {
+      type: String,
+      enum: ["cash", "card"],
+      default: "cash",
+    },
+    isPaid: {
+      type: Boolean,
+      default: false,
+    },
+    isDelivered: {
+      type: Boolean,
+      default: false,
+    },
+    paidAt: Date,
+    deliveredAt: Date,
+    paymentReference: {
+      type: String,
+      index: true,
+      unique: true,
+      sparse: true,
+    },
+  },
+  { timestamps: true }
+);
 
 export const orderModel = model("order", orderSchema);

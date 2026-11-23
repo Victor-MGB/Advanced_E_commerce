@@ -1,3 +1,4 @@
+import fs from "fs";
 import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 import { AppError } from "../src/utils/AppError.js";
@@ -5,8 +6,9 @@ import { AppError } from "../src/utils/AppError.js";
 const createMulterUploader = (folderName) => {
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      // console.log(file);
-      cb(null, `uploads/${folderName}`);
+      const directory = `uploads/${folderName}`;
+      fs.mkdirSync(directory, { recursive: true });
+      cb(null, directory);
     },
     filename: (req, file, cb) => {
       // console.log(file);

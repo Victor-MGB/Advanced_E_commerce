@@ -8,10 +8,25 @@ import cors from "cors"
 
 dotenv.config();
 const app = express();
-app.use(cors())
+
+const allowedOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Not allowed by CORS"));
+  },
+}));
 
 const PORT = process.env.PORT || 4000;
+app.use("/api/v1/orders/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 app.use(morgan("dev"));
 app.get("/", (req, res) => {
     res.send("API is running....");

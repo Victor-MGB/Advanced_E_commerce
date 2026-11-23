@@ -45,13 +45,16 @@ export const getAllProducts = catchAsyncError(async (req, res) => {
     .search()
     .sort();
 
+  const total = await apiFeature.countTotal();
   const products = await apiFeature.mongooseQuery;
-  const page = Number(req.query.page) || 1;
 
   res.status(200).json({
     status: "success",
     results: products.length,
-    page,
+    total,
+    page: apiFeature.page,
+    limit: apiFeature.limit,
+    totalPages: Math.ceil(total / apiFeature.limit),
     data: products,
   });
 });

@@ -32,7 +32,7 @@ export const signUp = catchAsyncError(async (req, res, next) => {
 
   const isUserExist = await userModel.findOne({ email: req.body.email });
   if (isUserExist) {
-    return next(new AppError("Account already exists!", isUserExist, 409));
+    return next(new AppError("Account already exists!", 409));
   }
 
   const user = await userModel.create(req.body);
@@ -75,6 +75,9 @@ export const protectedRoutes = catchAsyncError(async (req, res, next) => {
 
   const user = await userModel.findById(decoded.id);
   if (!user) return next(new AppError("User no longer exists", 404));
+  if (!user.isActive || user.blocked) {
+    return next(new AppError("Account is inactive or blocked", 403));
+  }
 
   if (user.passwordChangedAt) {
     let passwordChangedAt = parseInt(user.passwordChangedAt.getTime() / 1000);
@@ -89,6 +92,7 @@ export const protectedRoutes = catchAsyncError(async (req, res, next) => {
 
 export const allowedTo = (...roles) => {
   return catchAsyncError(async (req, res, next) => {
+    if (!req.user) return next(new AppError("Authentication required", 401));
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError(

@@ -3,7 +3,7 @@ import Joi from "joi";
 const addCategoryValidation = Joi.object({
   name: Joi.string().required().min(3).trim(),
   slug: Joi.string().lowercase(),
-  Image: Joi.string(),
+  image: Joi.string(),
 });
 
 const updateCategoryValidation = Joi.object({

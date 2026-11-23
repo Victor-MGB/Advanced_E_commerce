@@ -9,13 +9,17 @@ const productSchema = new Schema(
       trim: true,
       minLength: [3, "Too Short product Name"],
     },
+    slug: {
+      type: String,
+      lowercase: true,
+    },
     imgCover: {
       type: String,
     },
     images: {
       type: [String],
     },
-    descripton: {
+    description: {
       type: String,
       maxlength: [100, "Description should be less than or equal to 100"],
       minlength: [10, "Description should be more than or equal to 10"],
@@ -71,18 +75,20 @@ const productSchema = new Schema(
   { timestamps: true ,toJSON: { virtuals: true },toObject: { virtuals: true } }
 );
 
-productSchema.post('init',function(doc){
+productSchema.post("init", function (doc) {
+  const baseUrl = process.env.BASE_URL?.replace(/\/$/, "");
+  if (!baseUrl) return;
 
-  if(doc.imgCover && doc.images){
-
-    doc.imgCover = `${process.env.BASE_URL}products/${doc.imgCover}`
-    doc.images = doc.images.map((ele)=>{
-     return `${process.env.BASE_URL}products/${ele}`
-    })
+  if (doc.imgCover && !doc.imgCover.startsWith("http")) {
+    doc.imgCover = `${baseUrl}/products/${doc.imgCover}`;
   }
 
-  
-})
+  if (doc.images?.length) {
+    doc.images = doc.images.map((image) =>
+      image.startsWith("http") ? image : `${baseUrl}/products/${image}`
+    );
+  }
+});
 
 productSchema.virtual('reviews', {
   ref: 'review',

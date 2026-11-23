@@ -44,4 +44,4 @@ userSchema.methods.correctPassword = async function (
   return await bcryptjs.compare(candidatePassword, userPassword);
 };
 
-export const userModel = model("User1", userSchema);
+export const userModel = model("user", userSchema);

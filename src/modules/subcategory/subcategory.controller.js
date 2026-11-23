@@ -11,7 +11,8 @@ import { ApiFeatures } from "../../utils/ApiFeatures.js";
  * @access  Private (admin)
  */
 export const addSubCategory = catchAsyncError(async (req, res) => {
-  const { name, category } = req.body;
+  const { name } = req.body;
+  const category = req.params.categoryId || req.body.category;
 
   const subCategory = await subCategoryModel.create({
     name,

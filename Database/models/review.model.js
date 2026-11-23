@@ -2,8 +2,8 @@ import {Schema, model} from "mongoose";
 
 const reviewSchema = new Schema(
     {
-        text: {
-            type: String,   
+        comment: {
+            type: String,
             trim: true,
             required: true,
         },
@@ -17,9 +17,11 @@ const reviewSchema = new Schema(
             ref: "user",
             required: true,
         },
-        rate: {
+        rating: {
             type: Number,
             default: 1,
+            min: 1,
+            max: 5,
         },
     },
     {timestamps: true}

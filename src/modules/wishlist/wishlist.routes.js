@@ -13,16 +13,16 @@ wishListRouter
 .route("/")
 .patch(
     protectedRoutes,
-    allowedTo("user"),
+    allowedTo("user", "admin"),
     validate(addToWishListValidation),
     wishlist.addToWishList
 )
 .delete(
     protectedRoutes,
-    allowedTo("user"),
+    allowedTo("user", "admin"),
     validate(deleteFromWishListValidation),
     wishlist.removeFromWishList
 )
-.get(protectedRoutes, allowedTo("user"), wishlist.getAllUserWishList);
+.get(protectedRoutes, allowedTo("user", "admin"), wishlist.getAllUserWishList);
 
 export default wishListRouter;

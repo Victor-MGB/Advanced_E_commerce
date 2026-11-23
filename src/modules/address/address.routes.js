@@ -14,16 +14,16 @@ addressRouter
   .route("/")
   .patch(
     protectedRoutes,
-    allowedTo("user"),
+    allowedTo("user", "admin"),
     validate(addAddressValidation),
     address.addAddress
   )
   .delete(
     protectedRoutes,
-    allowedTo("user"),
+    allowedTo("user", "admin"),
     validate(deleteAddressValidation),
     address.removeAddress
   )
-  .get(protectedRoutes, allowedTo("user"), address.getAllAddresses);
+  .get(protectedRoutes, allowedTo("user", "admin"), address.getAllAddresses);
 
 export default addressRouter;
