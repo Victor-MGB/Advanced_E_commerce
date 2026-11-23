@@ -15,7 +15,7 @@ const getPaystackSecret = () => {
   return process.env.PAYSTACK_SECRET_KEY;
 };
 
-const getPaystackCurrency = () => (process.env.PAYSTACK_CURRENCY || "USD").toUpperCase();
+const getPaystackCurrency = () => (process.env.PAYSTACK_CURRENCY || "NGN").toUpperCase();
 
 const paystackRequest = async (path, { method = "GET", body } = {}) => {
   let response;

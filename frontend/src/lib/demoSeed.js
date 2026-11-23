@@ -504,7 +504,7 @@ export const demoUser = {
   _id: "u1",
   name: "Alex Morgan",
   email: "demo@lumastore.com",
-  role: "admin",
+  role: "user",
   wishlist: ["p2", "p6"],
   addresses: [
     { _id: "a1", city: "Abuja", street: "12 Ademola Adetokunbo Crescent", phone: "+234 803 000 0000" },

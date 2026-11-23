@@ -14,7 +14,7 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: PAYSTACK_CURRENCY
-        value: USD
+        value: NGN
       - key: MONGO_URI
         sync: false
       - key: JWT_SECRET

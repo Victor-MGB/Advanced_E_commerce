@@ -11,7 +11,7 @@ const app = express();
 
 const allowedOrigins = (process.env.FRONTEND_URL || "")
   .split(",")
-  .map((origin) => origin.trim())
+  .map((origin) => origin.trim().replace(/\/$/, ""))
   .filter(Boolean);
 
 app.use(cors({
@@ -19,7 +19,9 @@ app.use(cors({
     if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(new Error("Not allowed by CORS"));
+    const error = new Error("Not allowed by CORS");
+    error.statusCode = 403;
+    return callback(error);
   },
 }));
 

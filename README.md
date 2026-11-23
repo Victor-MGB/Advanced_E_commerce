@@ -12,7 +12,7 @@ npm start
 
 `npm start` runs `node index.js` for production; use `npm run dev` for `nodemon index.js`.
 
-Environment variables: `PORT`, `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `BASE_URL`, `FRONTEND_URL`, `PAYSTACK_SECRET_KEY`, `PAYSTACK_CURRENCY`, `NODE_ENV`, and optional `PAYSTACK_WEBHOOK_SECRET`. Set `PAYSTACK_CURRENCY` to your Paystack integration currency (`NGN`, `USD`, `GHS`, `ZAR`, or `KES`); prices are charged in that currency. Keep the storefront `VITE_CURRENCY` value aligned with it.
+Environment variables: `PORT`, `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `BASE_URL`, `FRONTEND_URL`, `PAYSTACK_SECRET_KEY`, `PAYSTACK_CURRENCY`, `NODE_ENV`, and optional `PAYSTACK_WEBHOOK_SECRET`. Set `PAYSTACK_CURRENCY` to your Paystack integration currency (`NGN`, `USD`, `GHS`, `ZAR`, or `KES`); it defaults to `NGN`, and prices are charged in that currency. Keep the storefront `VITE_CURRENCY` value aligned with it.
 
 ## Authentication
 
