@@ -13,7 +13,7 @@ export const setTokenProvider = (provider) => {
 async function request(path, { method = "GET", body, auth = false } = {}) {
   const headers = {};
   if (body !== undefined) headers["Content-Type"] = "application/json";
-  const token = tokenProvider();
+  const token = tokenProvider() || localStorage.getItem("luma_token");
   if (auth && token) headers.Authorization = `Bearer ${token}`;
 
   let response;
