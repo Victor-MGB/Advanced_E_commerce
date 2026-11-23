@@ -13,7 +13,14 @@ const PREFIX = "luma_v3_";
 const read = (key, seed) => {
   const stored = localStorage.getItem(PREFIX + key);
   if (stored) {
-    const value = JSON.parse(stored);
+    let value = JSON.parse(stored);
+    if (key === "user") {
+      const normalized = value && typeof value === "object" ? { ...value, role: "user" } : structuredClone(seed);
+      if (JSON.stringify(normalized) !== JSON.stringify(value)) {
+        localStorage.setItem(PREFIX + key, JSON.stringify(normalized));
+        value = normalized;
+      }
+    }
     if (key === "products" && Array.isArray(value) && Array.isArray(seed)) {
       const ids = new Set(value.map((item) => item._id));
       const missing = seed.filter((item) => !ids.has(item._id));
