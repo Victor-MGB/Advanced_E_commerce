@@ -132,15 +132,15 @@ export function StoreProvider({ children }) {
     async (productId) => {
       const wasSaved = wishlist.some((item) => item._id === productId);
       try {
-        const method = wasSaved ? "DELETE" : "POST";
-        const items = await api.toggleWishlist(productId, method);
-        setWishlist(items);
+        const method = wasSaved ? "DELETE" : "PATCH";
+        await api.toggleWishlist(productId, method);
+        await refreshWishlist();
         notify(wasSaved ? "Removed from wishlist" : "Saved to wishlist");
       } catch (error) {
         notify(error.message, "error");
       }
     },
-    [wishlist, notify]
+    [wishlist, notify, refreshWishlist]
   );
 
   const cartCount = useMemo(

@@ -6,11 +6,13 @@ import { userModel } from "../../../Database/models/user.model.js";
 export const addToWishList = catchAsyncError(async (req, res, next) => {
   const { productId } = req.body;
 
-  const user = await userModel.findByIdAndUpdate(
-    req.user._id,
-    { $addToSet: { wishlist: productId } },
-    { new: true }
-  );
+  const user = await userModel
+    .findByIdAndUpdate(
+      req.user._id,
+      { $addToSet: { wishlist: productId } },
+      { new: true }
+    )
+    .populate("wishlist");
 
   if (!user) return next(new AppError("Failed to add to wishlist", 400));
 
@@ -24,11 +26,13 @@ export const addToWishList = catchAsyncError(async (req, res, next) => {
 export const removeFromWishList = catchAsyncError(async (req, res, next) => {
   const { productId } = req.body;
 
-  const user = await userModel.findByIdAndUpdate(
-    req.user._id,
-    { $pull: { wishlist: productId } },
-    { new: true }
-  );
+  const user = await userModel
+    .findByIdAndUpdate(
+      req.user._id,
+      { $pull: { wishlist: productId } },
+      { new: true }
+    )
+    .populate("wishlist");
 
   if (!user) return next(new AppError("Failed to remove from wishlist", 400));
 

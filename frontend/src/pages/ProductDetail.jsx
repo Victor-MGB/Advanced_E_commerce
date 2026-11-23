@@ -139,7 +139,7 @@ export default function ProductDetail() {
           <h1 className="text-3xl font-bold leading-tight sm:text-4xl">{product.title}</h1>
           <div className="mt-3 flex items-center gap-4">
             <Rating value={product.ratingAvg || 0} count={product.ratingCount} />
-            <span className="text-xs text-slate-500">SKU: {product._id.toUpperCase()}</span>
+            <span className="text-xs text-slate-500">SKU: {String(product._id || product.id || "").toUpperCase() || "—"}</span>
           </div>
           <div className="mt-6"><Price product={product} size="lg" /></div>
           <p className="mt-5 text-sm leading-7 text-slate-600">{product.description}</p>
