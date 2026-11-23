@@ -36,6 +36,7 @@ async function request(path, { method = "GET", body, auth = false } = {}) {
 }
 
 const list = (payload) => (Array.isArray(payload) ? payload : payload.data || []);
+const single = (payload) => payload?.data ?? payload;
 
 const normalizeProduct = (product) => ({
   ...product,
@@ -86,7 +87,7 @@ export const api = {
 
   async getProduct(id) {
     if (DEMO_MODE) return demoDb.getProduct(id);
-    return normalizeProduct(await request(`/products/${id}`));
+    return normalizeProduct(single(await request(`/products/${id}`)));
   },
 
   async getCategories() {
