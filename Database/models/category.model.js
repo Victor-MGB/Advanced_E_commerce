@@ -22,7 +22,7 @@ const categorySchema = new Schema(
 
 categorySchema.post("init", function (doc) {
   const baseUrl = process.env.BASE_URL?.replace(/\/$/, "");
-  if (doc.image && baseUrl && !doc.image.startsWith("http")) {
+  if (doc.image && baseUrl && !doc.image.startsWith("http") && !doc.image.startsWith("/images/")) {
     doc.image = `${baseUrl}/category/${doc.image}`;
   }
 });

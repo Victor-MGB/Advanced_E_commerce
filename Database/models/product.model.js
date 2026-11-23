@@ -79,13 +79,15 @@ productSchema.post("init", function (doc) {
   const baseUrl = process.env.BASE_URL?.replace(/\/$/, "");
   if (!baseUrl) return;
 
-  if (doc.imgCover && !doc.imgCover.startsWith("http")) {
+  if (doc.imgCover && !doc.imgCover.startsWith("http") && !doc.imgCover.startsWith("/images/")) {
     doc.imgCover = `${baseUrl}/products/${doc.imgCover}`;
   }
 
   if (doc.images?.length) {
     doc.images = doc.images.map((image) =>
-      image.startsWith("http") ? image : `${baseUrl}/products/${image}`
+      image.startsWith("http") || image.startsWith("/images/")
+        ? image
+        : `${baseUrl}/products/${image}`
     );
   }
 });
